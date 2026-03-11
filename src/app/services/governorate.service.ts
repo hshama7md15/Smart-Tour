@@ -7,7 +7,7 @@ import { Governorate } from '../models/governorate.model';
   providedIn: 'root'
 })
 export class GovernorateService {
-  private readonly apiUrl = 'src/aassets/data/egypt-governorates.json';
+  private readonly apiUrl = 'blob/master/src/assets/data/egypt-governorates.json';
   private cache$?: Observable<Governorate[]>;
 
   constructor(private http: HttpClient) {}

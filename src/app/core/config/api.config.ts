@@ -22,14 +22,14 @@ export const API_CONFIG = {
   },
 
   FIREBASE: {
-    apiKey: 'AIzaSyDKvjunG5o2RocoHYKndhccmmqTvHPlkz4',
-    authDomain: 'smarttourprojct.firebaseapp.com',
+     apiKey: 'AIzaSyALCmKF-swTVIreSMoVzznii9rU7XJ06cE',
+    authDomain: 'angular-movie-app-iti-project.firebaseapp.com',
     databaseURL:
-      'https://smarttourprojct-default-rtdb.europe-west1.firebasedatabase.app',
-    projectId: 'smarttourprojct',
-    storageBucket: 'smarttourprojct.firebasestorage.app',
-    messagingSenderId: '5887139615',
-    appId: '1:5887139615:web:07e0838a6b98f6eb675a2a'
+      'https://smarttour-e9a34-default-rtdb.firebaseio.com',
+    projectId: 'angular-movie-app-iti-project',
+    storageBucket: 'angular-movie-app-iti-project.firebasestorage.app',
+    messagingSenderId: '561762620669',
+    appId: '1:561762620669:web:487c0333ab5dde1c5c5a94'
   }
 } as const;
 

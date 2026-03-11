@@ -1,0 +1,88 @@
+<div class="gov-places-container">
+  <header class="gov-header">
+    <button class="btn btn-back" routerLink="/places">← All Egypt</button>
+    <h1>{{ governorateName() }}</h1>
+    <p>Explore all attractions in this governorate.</p>
+  </header>
+
+  <!-- Search & Filters (same style as main places) -->
+  <section class="filters-wrapper">
+    <div class="search-row">
+      <div class="search-input-wrapper">
+        <input
+          type="text"
+          placeholder="Search attractions in this governorate..."
+          [value]="searchTerm()"
+          (input)="onSearchChange($any($event.target).value)"
+        />
+        <span class="search-icon">🔎</span>
+      </div>
+    </div>
+
+    <div class="filter-row">
+      <div class="filter-group">
+        <label>City</label>
+        <select [value]="selectedCity()" (change)="onCityChange($any($event.target).value)">
+          <option *ngFor="let city of cities()" [value]="city">{{ city }}</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>Sort by</label>
+        <select [value]="sortOption()" (change)="onSortChange($any($event.target).value)">
+          <option value="name-asc">Name (A → Z)</option>
+          <option value="name-desc">Name (Z → A)</option>
+          <option value="distance-asc">Distance (nearest)</option>
+        </select>
+      </div>
+    </div>
+
+    <p class="geo-hint" *ngIf="geolocationError()">
+      {{ geolocationError() }}
+    </p>
+  </section>
+
+  <!-- Loading / Error -->
+  <div class="loading" *ngIf="loading()">
+    <p>Loading attractions for {{ governorateName() }}...</p>
+  </div>
+
+  <div class="error-message" *ngIf="!loading() && errorMessage()">
+    {{ errorMessage() }}
+  </div>
+
+  <!-- Places Grid -->
+  <div class="places-grid" *ngIf="!loading() && !errorMessage() && filteredPlaces().length">
+    <div class="place-card" *ngFor="let place of filteredPlaces(); trackBy: trackByPlaceId">
+      <div class="place-image">
+        <img [src]="place.imageUrl" [alt]="place.name" loading="lazy" (error)="onImageError($event)" />
+        <div class="rating-badge">
+          <span class="stars">⭐</span>
+          {{ place.rating | number: '1.1-1' }}
+        </div>
+      </div>
+      <div class="place-info">
+        <h3>{{ place.name }}</h3>
+        <p class="city">
+          📍 {{ place.city }}
+        </p>
+        <p class="description">{{ place.description }}</p>
+        <p class="category">{{ place.category }}</p>
+        <p class="distance" *ngIf="place.distanceKm as distance">
+          Approx. {{ distance }} km from you
+        </p>
+        <button
+          class="btn btn-details"
+          (click)="goToDetails(place)"
+        >
+          View Details
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="no-results" *ngIf="!loading() && !errorMessage() && !filteredPlaces().length">
+    <p>No attractions match your filters in this governorate.</p>
+  </div>
+</div>
+

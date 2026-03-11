@@ -1,0 +1,63 @@
+<div class="recommendations-container">
+  <header class="recommendations-header">
+    <h1>Your Recommendations</h1>
+    <p>Personalized places recommended based on your interests</p>
+  </header>
+
+  <!-- Loading State -->
+  <div class="loading" *ngIf="loading">
+    <p>Loading your recommendations...</p>
+  </div>
+
+  <!-- Error State -->
+  <div class="error-message" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+
+  <!-- No Recommendations -->
+  <div class="no-recommendations" *ngIf="!loading && noRecommendations">
+    <div class="empty-state">
+      <p class="icon">🎯</p>
+      <h2>No Recommendations Yet</h2>
+      <p>Start exploring places to get personalized recommendations!</p>
+      <button class="btn btn-primary" routerLink="/places">
+        Explore Places
+      </button>
+    </div>
+  </div>
+
+  <!-- Recommendations Grid -->
+  <div class="recommendations-grid" *ngIf="!loading && !noRecommendations">
+    <div class="recommendation-card" *ngFor="let recommendation of recommendations">
+      <div class="recommendation-image">
+        <img [src]="recommendation.place.imageUrl" [alt]="recommendation.place.name" />
+        <div class="match-score">
+          <span class="match-icon">✓</span>
+          <span class="score">{{ recommendation.score | number: '1.0-0' }}% Match</span>
+        </div>
+      </div>
+      <div class="recommendation-info">
+        <h3>{{ recommendation.place.name }}</h3>
+        <p class="city">📍 {{ recommendation.place.city }}</p>
+        <p class="reason">
+          <strong>Why recommended:</strong> {{ recommendation.reason }}
+        </p>
+        <p class="category">{{ recommendation.place.category }}</p>
+        <div class="recommendation-actions">
+          <button
+            class="btn btn-view"
+            (click)="goToPlaceDetails(recommendation.place)"
+          >
+            View Details
+          </button>
+          <button
+            class="btn btn-remove"
+            (click)="removeRecommendation(recommendation.id)"
+          >
+            Remove
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

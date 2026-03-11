@@ -1,0 +1,52 @@
+.weather-widget-container {
+  display: flex;
+  align-items: center;
+  padding: 4px 12px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  color: white;
+  font-size: 0.9rem;
+  height: 36px;
+}
+
+.weather-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.weather-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.temperature {
+  font-weight: 600;
+}
+
+.separator {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.time {
+  font-variant-numeric: tabular-nums;
+}
+
+.loading-spinner {
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #3498db;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 1s linear infinite;
+}
+
+.weather-error {
+  font-size: 0.8rem;
+  color: #ffdddd;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
